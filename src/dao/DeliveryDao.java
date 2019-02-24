@@ -99,4 +99,16 @@ public class DeliveryDao {
 		}
 	}
 
+	public List<Delivery> searchDelivery(String text) {
+		List<Delivery> list = new ArrayList<>();
+		String sql = "select * from delivery where content like ? order by id desc";
+        String content = "%" + text + "%";
+        try {      
+            list = (List<Delivery>) qr.query(sql, new BeanListHandler(Delivery.class), content); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+	}
+
 }

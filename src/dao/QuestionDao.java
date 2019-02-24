@@ -110,4 +110,16 @@ public class QuestionDao {
 			e.printStackTrace();
 		}
 	}
+
+	public List<Question> searchQuestion(String text) {
+		List<Question> list = new ArrayList<>();
+		String sql = "select * from question where content like ? order by id desc";
+        String content = "%"+text+"%";
+        try {      
+            list = (List<Question>) qr.query(sql, new BeanListHandler(Question.class), content); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+	}
 }

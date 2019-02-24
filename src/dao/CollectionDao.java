@@ -49,8 +49,19 @@ public class CollectionDao {
 		String sql = "delete from collection where id = ?";
 		try{
 			qr.update(sql, id);
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
+	}
+
+	public List<Collection> getCollection(int userId, int keyId, String label) {
+		List<Collection> list = new ArrayList<>();
+		String sql = "select * from collection where userId = ? and keyId = ? and label = ?";
+		try{
+			list = (List<Collection>) qr.query(sql, new BeanListHandler(Collection.class), userId, keyId, label);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

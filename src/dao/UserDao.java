@@ -56,4 +56,22 @@ public class UserDao {
 		
 	}
 
+	public void updateImage(String image, String userId) {
+		String sql = "update user set image = ? where id = ?";
+		try{
+			qr.update(sql, image, userId);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}		
+	}
+
+	public void updateInfo(String userName, String department, String major, String words) {
+		String sql = "update user set name = ?, department = ?, major = ?, words = ? where id = ?";
+		try{
+			qr.update(sql, userName, department, major, words);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}			
+	}
+
 }

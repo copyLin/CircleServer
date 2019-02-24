@@ -25,7 +25,7 @@ public class ChatRecordDao {
 	
 	public List<ChatRecord> getChatRecord(int fromId, int toId, int currentId){
 		List<ChatRecord> list = new ArrayList<>();
-		String sql = "select * from chatRecord where fromId in (?, ?) and toId in (?, ?) and id < ? limit 20";
+		String sql = "select * from chatRecord where fromId in (?, ?) and toId in (?, ?) and id < ? order by id desc limit 20";
 		try{
 			list = (List<ChatRecord>) qr.query(sql, new BeanListHandler(ChatRecord.class), new Object[]{fromId, toId, fromId, toId, currentId});
 		}catch(SQLException e){
@@ -37,7 +37,7 @@ public class ChatRecordDao {
 	
 	public List<ChatRecord> getUnreadChatRecord(int userId){
 		List<ChatRecord> list = new ArrayList<>();
-		String sql = "select * from chatRecord where toId = ? and flag = false";
+		String sql = "select * from chatRecord where toId = ? and flag = false order by id desc";
 		try{
 			list = (List<ChatRecord>) qr.query(sql, new BeanListHandler(ChatRecord.class), userId);
 		}catch(SQLException e){
@@ -57,7 +57,7 @@ public class ChatRecordDao {
 
 	public List<ChatRecord> getRecentChat(int userId) {
 		List<ChatRecord> list = new ArrayList<>();
-		String sql = "select * from chatRecord where toId = ? group by fromId";
+		String sql = "select * from chatRecord where id in(select max(id) from chatRecord where toId = ? group by fromId)";
 		try{
 			list = (List<ChatRecord>) qr.query(sql, new BeanListHandler(ChatRecord.class), userId);
 		}catch(SQLException e){
@@ -68,7 +68,7 @@ public class ChatRecordDao {
 
 	public List<ChatRecord> getChatRecord(int fromId, int toId) {
 		List<ChatRecord> list = new ArrayList<>();
-		String sql = "select * from chatRecord where fromId in (?, ?) and toId in (?, ?) limit 20";
+		String sql = "select * from chatRecord where fromId in (?, ?) and toId in (?, ?) order by id desc limit 20";
 		try{
 			list = (List<ChatRecord>) qr.query(sql, new BeanListHandler(ChatRecord.class), new Object[]{fromId, toId, fromId, toId});
 		}catch(SQLException e){

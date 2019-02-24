@@ -13,14 +13,14 @@ import vo.User;
 /**
  * Servlet implementation class ChangePassword
  */
-@WebServlet("/changePassword")
-public class ChangePassword extends HttpServlet {
+@WebServlet("/updatePassword")
+public class UpdatePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePassword() {
+    public UpdatePassword() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +33,16 @@ public class ChangePassword extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String userId = request.getParameter("userId");
 		String oldPassword = request.getParameter("oldPassword");
-		String newPassword1 = request.getParameter("newPassword1");
-		String newPassword2 = request.getParameter("newPassword2");
+		String firstInput = request.getParameter("firstInput");
+		String secondInput = request.getParameter("secondInput");
+		
+		System.out.println("ChangePassword" + oldPassword + firstInput + secondInput); 
 		
 		UserDao userDao = new UserDao();
 		User user = userDao.getUser(Integer.valueOf(userId));
 		if(oldPassword.equals(user.getPassword())){
-			if(newPassword1.equals(newPassword2)){
-				userDao.updatePassword(newPassword1, Integer.valueOf(userId));
+			if(firstInput.equals(secondInput)){
+				userDao.updatePassword(firstInput, Integer.valueOf(userId));
 				response.getWriter().append("修改成功");
 			}else{
 				response.getWriter().append("新密码不一致");

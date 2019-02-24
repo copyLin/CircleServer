@@ -46,6 +46,8 @@ public class NewViewPointServlet extends HttpServlet {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			ViewPoint viewPoint = new ViewPoint(0, Integer.valueOf(keyId), label, Integer.valueOf(toId), content, Integer.valueOf(userId), formatter.parse(sendTime), false);
 			viewPointDao.addViewPoint(viewPoint);
+			
+			System.out.println(viewPoint);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

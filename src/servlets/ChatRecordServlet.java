@@ -54,7 +54,7 @@ public class ChatRecordServlet extends HttpServlet {
 		
 		if(!list.isEmpty()){
 			for(ChatRecord chatRecord : list){
-				String id = String.valueOf(chatRecord.getId());
+				int id = chatRecord.getId();
 			    String content = chatRecord.getContent();
 			    String fromId = String.valueOf(chatRecord.getFromId());
 			    String toId = String.valueOf(chatRecord.getToId());
@@ -64,6 +64,9 @@ public class ChatRecordServlet extends HttpServlet {
 			    ChatItem item = new ChatItem(id, content, fromId, toId, sendTime, flag);
 			    items.add(item);
 			}
+			
+			//System.out.println("ChatRecord:" + items);
+			
 			String jsonString = JSONArray.fromObject(items).toString();
     		response.setContentType("text/html;charset=utf-8");
     		response.getWriter().append(jsonString);

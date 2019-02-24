@@ -65,8 +65,8 @@ public class ChatServer {
 
 			this.socket = socket;
 			try {
-				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));// 获得输入流对象
-				out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));//获得输出流对象
+				in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));// 获得输入流对象
+				out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"));//获得输出流对象
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -79,24 +79,24 @@ public class ChatServer {
 				
 				while (true) {					
 					if ((message = in.readLine())!= null) {
-						
+						System.out.println(message);
 						if(message.startsWith("enter:")){
 							
 							String userId = message.substring(6);
 							mClientList.put(userId, socket);
 							//mClientOutputStreams.put(userId, out);
 							System.out.println(userId + " 用户上线");
-							//System.out.println("当前连接总数:" + mClientOutputStreams.size());
+							System.out.println("当前连接总数:" + mClientList.size());
 							
 							chatRecordDao = new ChatRecordDao();
 							chatRecords = chatRecordDao.getUnreadChatRecord(Integer.parseInt(userId));
-							if(chatRecords != null){
+							if(!chatRecords.isEmpty()){
 								for(ChatRecord chatRecord : chatRecords){
-									ChatItem item = new ChatItem(String.valueOf(chatRecord.getId()), chatRecord.getContent(), String.valueOf(chatRecord.getFromId()), String.valueOf(chatRecord.getToId()), String.valueOf(chatRecord.getSendTime()), chatRecord.isFlag());
+									ChatItem item = new ChatItem(chatRecord.getId(), chatRecord.getContent(), String.valueOf(chatRecord.getFromId()), String.valueOf(chatRecord.getToId()), String.valueOf(chatRecord.getSendTime()), chatRecord.isFlag());
 									JSONObject json = JSONObject.fromObject(item);
 									String jsonData = json.toString();
 									System.out.println(userId + "未接收数据：" + item);
-									out.write(jsonData);
+									out.write(jsonData + "\n");
 									out.flush();
 									chatRecordDao.updateFlag(chatRecord.getId());
 								}
@@ -139,7 +139,7 @@ public class ChatServer {
 				out.close();
 				socket.close();
 				
-				//System.out.println("当前连接总数:" + mClientOutputStreams.size());
+				System.out.println("当前连接总数:" + mClientList.size());
 			
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -163,8 +163,8 @@ public class ChatServer {
 				System.out.println("目标用户：" + toId);
 				
 				if(mClientList.get(toId) != null){
-	    			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(mClientList.get(toId).getOutputStream()));// 获得输出流对象
-	    			writer.write(jsonData);
+	    			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(mClientList.get(toId).getOutputStream(), "utf-8"));// 获得输出流对象
+	    			writer.write(jsonData + "\n");
 	    			writer.flush();// 转发
 	    			chatRecord.setFlag(true);
 	    			System.out.println("目标用户在线 >>" + item); // 在控制台输出

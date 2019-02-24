@@ -1,28 +1,25 @@
 package servlets;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CollectionDao;
-import vo.Collection;
+import dao.UserDao;
 
 /**
- * Servlet implementation class NewCollectionServlet
+ * Servlet implementation class UpdateUserInfo
  */
-@WebServlet("/newCollectionServlet")
-public class NewCollectionServlet extends HttpServlet {
+@WebServlet("/updateUserInfo")
+public class UpdateUserInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewCollectionServlet() {
+    public UpdateUserInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +28,17 @@ public class NewCollectionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String name = request.getParameter("name");
-		String userId = request.getParameter("userId");
-		String collectionTime = request.getParameter("collectionTime");
-		String keyId = request.getParameter("keyId");
-		String label = request.getParameter("label");
+		String userName = request.getParameter("userName");
+		String department = request.getParameter("department");
+		String major = request.getParameter("major");
+		String words = request.getParameter("words");
 		
-		CollectionDao collectionDao = new CollectionDao();
+		System.out.println("UpdateUserInfo:" + userName + department + major + words);
 		
-		try{
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Collection collection = new Collection(0, name, Integer.valueOf(userId), formatter.parse(collectionTime), Integer.valueOf(keyId), label);
-			collectionDao.addCollection(collection);
-			
-			System.out.println(collection);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		UserDao userDao = new UserDao();
+		userDao.updateInfo(userName, department, major, words);
+		response.getWriter().append("InfoUpdated");
 	}
 
 	/**

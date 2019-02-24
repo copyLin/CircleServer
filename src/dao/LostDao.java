@@ -111,4 +111,16 @@ public class LostDao {
 		}
 	}
 
+	public List<Lost> searchLost(String text) {
+		List<Lost> list = new ArrayList<>();
+		String sql = "select * from lost where content like ? order by id desc";
+        String content = "%" + text + "%";
+        try {      
+            list = (List<Lost>) qr.query(sql, new BeanListHandler(Lost.class), content); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+	}
+
 }

@@ -110,4 +110,16 @@ public class IdleDao {
 			e.printStackTrace();
 		}
 	}
+
+	public List<Idle> searchIdle(String text) {
+		List<Idle> list = new ArrayList<>();
+		String sql = "select * from idle where name like ? order by id desc";
+        String name = "%" + text + "%";
+        try {      
+            list = (List<Idle>) qr.query(sql, new BeanListHandler(Idle.class), name); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+	}
 }

@@ -2,7 +2,7 @@ package com.example.linxl.circle.gson;
 
 public class ChatItem{
 
-    private String id;
+    private int id;
     private String content;
     private String fromId;
     private String toId;
@@ -12,7 +12,7 @@ public class ChatItem{
     public ChatItem() {
     }
 
-    public ChatItem(String id, String content, String fromId, String toId, String sendTime, boolean flag) {
+    public ChatItem(int id, String content, String fromId, String toId, String sendTime, boolean flag) {
         this.id = id;
         this.content = content;
         this.fromId = fromId;
@@ -21,11 +21,11 @@ public class ChatItem{
         this.flag = flag;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

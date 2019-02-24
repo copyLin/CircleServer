@@ -14,7 +14,7 @@ import dao.DeliveryDao;
 /**
  * Servlet implementation class UpdateDeliveryServlet
  */
-@WebServlet("/updateDeliveryServlet")
+@WebServlet("/updateDeliveryFlag")
 public class UpdateDeliveryFlag extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

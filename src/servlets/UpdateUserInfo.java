@@ -29,6 +29,7 @@ public class UpdateUserInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String userId = request.getParameter("userId");
 		String userName = request.getParameter("userName");
 		String department = request.getParameter("department");
 		String major = request.getParameter("major");
@@ -37,7 +38,7 @@ public class UpdateUserInfo extends HttpServlet {
 		System.out.println("UpdateUserInfo:" + userName + department + major + words);
 		
 		UserDao userDao = new UserDao();
-		userDao.updateInfo(userName, department, major, words);
+		userDao.updateInfo(userId, userName, department, major, words);
 		response.getWriter().append("InfoUpdated");
 	}
 

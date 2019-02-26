@@ -40,6 +40,8 @@ public class MyCollectionServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String currentId = request.getParameter("currentId");
 		
+		System.out.println("MyCollection:" + userId + ", " + currentId);
+		
 		CollectionDao collectionDao = new CollectionDao();
 		
 		List<Collection> list = new ArrayList<>();;

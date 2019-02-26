@@ -65,10 +65,10 @@ public class UserDao {
 		}		
 	}
 
-	public void updateInfo(String userName, String department, String major, String words) {
+	public void updateInfo(String userId, String userName, String department, String major, String words) {
 		String sql = "update user set name = ?, department = ?, major = ?, words = ? where id = ?";
 		try{
-			qr.update(sql, userName, department, major, words);
+			qr.update(sql, userName, department, major, words, userId);
 		}catch(SQLException e){
 			e.printStackTrace();
 		}			

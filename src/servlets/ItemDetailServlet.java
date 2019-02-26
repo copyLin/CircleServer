@@ -57,66 +57,78 @@ public class ItemDetailServlet extends HttpServlet {
 				QuestionDao questionDao = new QuestionDao();
 				Question question = questionDao.getQuestionById(Integer.valueOf(keyId));
 				
-				String questionId = String.valueOf(question.getId());
-				String qUserImg = userDao.getUserImg(question.getUserId());
-				String qUserName = userDao.getUserName(question.getUserId());
-				String qUserId = String.valueOf(question.getUserId());
-				String qSendTime = String.valueOf(question.getSendTime());
-				String qContent = question.getContent();
-				boolean qFlag = question.isFlag();
-				int qReportNum = question.getReportNum();
-				List<String> qImages = imageDao.getImageName(question.getUserId(), question.getSendTime());
-			
-				QuestionItem questionItem = new QuestionItem(questionId, qUserImg, qUserName, qUserId, qSendTime, qContent, qFlag, qReportNum, qImages);
+				if(question != null){
+					String questionId = String.valueOf(question.getId());
+					String qUserImg = userDao.getUserImg(question.getUserId());
+					String qUserName = userDao.getUserName(question.getUserId());
+					String qUserId = String.valueOf(question.getUserId());
+					String qSendTime = String.valueOf(question.getSendTime());
+					String qContent = question.getContent();
+					boolean qFlag = question.isFlag();
+					int qReportNum = question.getReportNum();
+					List<String> qImages = imageDao.getImageName(question.getUserId(), question.getSendTime());
 				
-				String jsonString1 = JSONObject.fromObject(questionItem).toString();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().append(jsonString1);
+					QuestionItem questionItem = new QuestionItem(questionId, qUserImg, qUserName, qUserId, qSendTime, qContent, qFlag, qReportNum, qImages);
+					
+					String jsonString1 = JSONObject.fromObject(questionItem).toString();
+					response.setContentType("text/html;charset=utf-8");
+					response.getWriter().append(jsonString1);
+				}else{
+					response.getWriter().append("NoData");
+				}
 				break;
 			case "Lost":
 				LostDao lostDao = new LostDao();
 				Lost lost = lostDao.getLostById(Integer.valueOf(keyId));
 				
-				String lostId = String.valueOf(lost.getId());
-			    String lUserImg = userDao.getUserImg(lost.getUserId());
-			    String lUserName = userDao.getUserName(lost.getUserId());
-			    String lUserId = String.valueOf(lost.getUserId());
-			    String lSendTime = String.valueOf(lost.getSendTime());
-			    String lContent = lost.getContent();
-			    String eventTime = String.valueOf(lost.getEventTime());
-			    String location = lost.getLocation();
-			    String contact = lost.getContact();
-			    boolean lFlag = lost.isFlag();
-			    int lReportNum = lost.getReportNum();
-			    List<String> lImages = imageDao.getImageName(lost.getUserId(), lost.getSendTime());
-			    
-			    LostItem lostItem = new LostItem(lostId, lUserImg, lUserName, lUserId, lSendTime, lContent, eventTime, location, contact, lFlag, lReportNum, lImages);
-				
-				String jsonString2 = JSONObject.fromObject(lostItem).toString();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().append(jsonString2);
+				if(lost != null){
+					String lostId = String.valueOf(lost.getId());
+				    String lUserImg = userDao.getUserImg(lost.getUserId());
+				    String lUserName = userDao.getUserName(lost.getUserId());
+				    String lUserId = String.valueOf(lost.getUserId());
+				    String lSendTime = String.valueOf(lost.getSendTime());
+				    String lContent = lost.getContent();
+				    String eventTime = String.valueOf(lost.getEventTime());
+				    String location = lost.getLocation();
+				    String contact = lost.getContact();
+				    boolean lFlag = lost.isFlag();
+				    int lReportNum = lost.getReportNum();
+				    List<String> lImages = imageDao.getImageName(lost.getUserId(), lost.getSendTime());
+				    
+				    LostItem lostItem = new LostItem(lostId, lUserImg, lUserName, lUserId, lSendTime, lContent, eventTime, location, contact, lFlag, lReportNum, lImages);
+					
+					String jsonString2 = JSONObject.fromObject(lostItem).toString();
+					response.setContentType("text/html;charset=utf-8");
+					response.getWriter().append(jsonString2);
+				}else{
+					response.getWriter().append("NoData");
+				}
 				break;
 			case "Idle":
 				IdleDao idleDao = new IdleDao();
 				Idle idle = idleDao.getIdleById(Integer.valueOf(keyId));
 				
-				String idleId = String.valueOf(idle.getId());
-			    String iUserImg = userDao.getUserImg(idle.getUserId());
-			    String iUserName = userDao.getUserName(idle.getUserId());
-			    String iUserId = String.valueOf(idle.getUserId());
-			    String iSendTime = String.valueOf(idle.getSendTime());
-			    String iContent = idle.getContent();
-			    String idleName = idle.getName();
-			    String price = String.valueOf(idle.getPrice());
-			    boolean iFlag = idle.isFlag();
-			    int iReportNum = idle.getReportNum();
-			    List<String> iImages = imageDao.getImageName(idle.getUserId(), idle.getSendTime());
-			    
-			    IdleItem idleItem = new IdleItem(idleId, iUserImg, iUserName, iUserId, iSendTime, iContent, idleName, price, iFlag, iReportNum, iImages);
-				
-				String jsonString3 = JSONObject.fromObject(idleItem).toString();
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().append(jsonString3);
+				if(idle != null){
+					String idleId = String.valueOf(idle.getId());
+				    String iUserImg = userDao.getUserImg(idle.getUserId());
+				    String iUserName = userDao.getUserName(idle.getUserId());
+				    String iUserId = String.valueOf(idle.getUserId());
+				    String iSendTime = String.valueOf(idle.getSendTime());
+				    String iContent = idle.getContent();
+				    String idleName = idle.getName();
+				    String price = String.valueOf(idle.getPrice());
+				    boolean iFlag = idle.isFlag();
+				    int iReportNum = idle.getReportNum();
+				    List<String> iImages = imageDao.getImageName(idle.getUserId(), idle.getSendTime());
+				    
+				    IdleItem idleItem = new IdleItem(idleId, iUserImg, iUserName, iUserId, iSendTime, iContent, idleName, price, iFlag, iReportNum, iImages);
+					
+					String jsonString3 = JSONObject.fromObject(idleItem).toString();
+					response.setContentType("text/html;charset=utf-8");
+					response.getWriter().append(jsonString3);
+				}else{
+					response.getWriter().append("NoData");
+				}
 				break;
 			case "User":
 				User user = userDao.getUser(Integer.valueOf(keyId));

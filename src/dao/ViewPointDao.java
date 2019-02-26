@@ -26,7 +26,7 @@ public class ViewPointDao {
 	
 	public List<ViewPoint> getViewPoint(int keyId, String label){
 		List<ViewPoint> list = new ArrayList<>();
-		String sql = "select * from viewPoint where keyId = ? and label = ?";
+		String sql = "select * from viewPoint where keyId = ? and label = ? order by id desc";
 		try{
 			list = (List<ViewPoint>) qr.query(sql, new BeanListHandler(ViewPoint.class), keyId, label);
 		}catch(SQLException e){

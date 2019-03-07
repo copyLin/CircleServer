@@ -28,7 +28,7 @@ public class IdleDao {
 
 	public List<Idle> getIdle(int currentId){
 		List<Idle> list = new ArrayList<>();
-		String sql = "select * from idle where id < ? and flag = false order by id desc limit 20";
+		String sql = "select * from idle where id < ? and flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Idle>) qr.query(sql, new BeanListHandler(Idle.class), currentId);
 		}catch(SQLException e){
@@ -93,7 +93,7 @@ public class IdleDao {
 
 	public List<Idle> getIdle() {
 		List<Idle> list = new ArrayList<>();
-		String sql = "select * from idle where flag = false order by id desc limit 20";
+		String sql = "select * from idle where flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Idle>) qr.query(sql, new BeanListHandler(Idle.class));
 		}catch(SQLException e){
@@ -121,5 +121,14 @@ public class IdleDao {
             e.printStackTrace();
         }
         return list;
+	}
+
+	public void updateReportNum(int id) {
+		String sql = "update idle set reportNum = reportNum + 1 where id = ?";
+		try {
+			qr.update(sql, id);
+		} catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 }

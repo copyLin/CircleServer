@@ -28,7 +28,7 @@ public class LostDao {
 
 	public List<Lost> getLost(int currentId){
 		List<Lost> list = new ArrayList<>();
-		String sql = "select * from lost where id < ? and flag = false order by id desc limit 20";
+		String sql = "select * from lost where id < ? and flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Lost>) qr.query(sql, new BeanListHandler(Lost.class), currentId);
 		}catch(SQLException e){
@@ -93,7 +93,7 @@ public class LostDao {
 
 	public List<Lost> getLost() {
 		List<Lost> list = new ArrayList<>();
-		String sql = "select * from lost where flag = false order by id desc limit 20";
+		String sql = "select * from lost where flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Lost>) qr.query(sql, new BeanListHandler(Lost.class));
 		}catch(SQLException e){
@@ -121,6 +121,15 @@ public class LostDao {
             e.printStackTrace();
         }
         return list;
+	}
+
+	public void updateReportNum(int id) {
+		String sql = "update lost set reportNum = reportNum + 1 where id = ?";
+		try {
+			qr.update(sql, id);
+		} catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 
 }

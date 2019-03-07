@@ -61,6 +61,8 @@ public class UnreadViewPoint extends HttpServlet {
 				String keyId = String.valueOf(viewPoint.getKeyId());
 				String label = viewPoint.getLabel();
 				
+				viewPointDao.updateFlag(viewPoint.getId());
+				
 				switch(viewPoint.getLabel()){
 		    	case "Question":
 		    		QuestionDao questionDao = new QuestionDao();
@@ -81,6 +83,10 @@ public class UnreadViewPoint extends HttpServlet {
 		    	default:
 		    		break;
 		    }
+				if(tip == null){
+			    	tip = "未找到该内容，可能已被删除";
+			    }
+				
 				ViewPointItem item = new ViewPointItem(viewPointId, userId, userImg, userName, content, sendTime, tip, keyId, label);
 			    items.add(item);
 			}

@@ -87,5 +87,14 @@ public class ViewPointDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void updateFlag(int id){
+		String sql = "update viewPoint set flag = true where id = ?";
+		try{
+			qr.update(sql, id);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 
 }

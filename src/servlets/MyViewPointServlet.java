@@ -89,7 +89,7 @@ public class MyViewPointServlet extends HttpServlet {
 			    }
 			    
 			    if(tip == null){
-			    	tip = "未找到该内容，可能已被删除";
+			    	tip = "未找到该内容，或已被删除";
 			    }
 			    
 			    ViewPointItem item = new ViewPointItem(viewPointId, userId, userImg, userName, content, sendTime, tip, keyId, label);

@@ -157,7 +157,7 @@ public class ChatServer {
 				JSONObject jsonObject = JSONObject.fromObject(jsonData);
 				ChatItem item = (ChatItem) JSONObject.toBean(jsonObject, ChatItem.class);
 				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				ChatRecord chatRecord = new ChatRecord(0, item.getContent(), Integer.valueOf(item.getFromId()), Integer.valueOf(item.getToId()), formatter.parse(item.getSendTime()), item.isFlag());
+				ChatRecord chatRecord = new ChatRecord(0, item.getContent(), Integer.valueOf(item.getFromId()), Integer.valueOf(item.getToId()), formatter.parse(item.getSendTime()), item.isFlag(), true);
 				
 				String toId = item.getToId();
 				System.out.println("目标用户：" + toId);

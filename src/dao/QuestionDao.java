@@ -28,7 +28,7 @@ public class QuestionDao {
 
 	public List<Question> getQuestion(int currentId){
 		List<Question> list = new ArrayList<>();
-		String sql = "select * from question where id < ? and flag = false order by id desc limit 20";
+		String sql = "select * from question where id < ? and flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Question>) qr.query(sql, new BeanListHandler(Question.class), currentId);
 		}catch(SQLException e){
@@ -93,7 +93,7 @@ public class QuestionDao {
 
 	public List<Question> getQuestion() {
 		List<Question> list = new ArrayList<>();
-		String sql = "select * from question where flag = false order by id desc limit 20";
+		String sql = "select * from question where flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Question>) qr.query(sql, new BeanListHandler(Question.class));
 		}catch(SQLException e){
@@ -121,5 +121,14 @@ public class QuestionDao {
             e.printStackTrace();
         }
         return list;
+	}
+
+	public void updateReportNum(int id) {
+		String sql = "update question set reportNum = reportNum + 1 where id = ?";
+		try {
+			qr.update(sql, id);
+		} catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 }

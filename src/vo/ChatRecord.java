@@ -10,12 +10,13 @@ public class ChatRecord {
 	private int toId;
 	private Date sendTime;
 	private boolean flag;
+	private boolean state;
 	
 	public ChatRecord() {
 		super();
 	}
 
-	public ChatRecord(int id, String content, int fromId, int toId, Date sendTime, boolean flag) {
+	public ChatRecord(int id, String content, int fromId, int toId, Date sendTime, boolean flag, boolean state) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -23,6 +24,7 @@ public class ChatRecord {
 		this.toId = toId;
 		this.sendTime = sendTime;
 		this.flag = flag;
+		this.state = state;
 	}
 
 	public int getId() {
@@ -73,10 +75,18 @@ public class ChatRecord {
 		this.flag = flag;
 	}
 
+	public boolean isState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatRecord [id=" + id + ", content=" + content + ", fromId=" + fromId + ", toId=" + toId + ", sendTime="
-				+ sendTime + ", flag=" + flag + "]";
+				+ sendTime + ", flag=" + flag + ", state=" + state + "]";
 	}
 
 }

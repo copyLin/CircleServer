@@ -27,7 +27,7 @@ public class DeliveryDao {
 
 	public List<Delivery> getDelivery(int currentId){
 		List<Delivery> list = new ArrayList<>();
-		String sql = "select * from delivery where id < ? and flag = false order by id desc limit 20";
+		String sql = "select * from delivery where id < ? and flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Delivery>) qr.query(sql, new BeanListHandler(Delivery.class), currentId);
 		}catch(SQLException e){
@@ -70,7 +70,7 @@ public class DeliveryDao {
 
 	public List<Delivery> getDelivery() {
 		List<Delivery> list = new ArrayList<>();
-		String sql = "select * from delivery where flag = false order by id desc limit 20";
+		String sql = "select * from delivery where flag = false and reportNum < 20 order by id desc limit 20";
 		try{
 			list = (List<Delivery>) qr.query(sql, new BeanListHandler(Delivery.class));
 		}catch(SQLException e){

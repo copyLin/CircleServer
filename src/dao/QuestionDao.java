@@ -70,10 +70,10 @@ public class QuestionDao {
 		return question;
 	}
 
-	public void deleteQuestion(int userId, Date sendTime) {
-		String sql = "delete from question where userId = ? and sendTime = ?";
+	public void deleteQuestion(int id) {
+		String sql = "delete from question where id = ?";
 		try{
-			qr.update(sql, userId, sendTime);
+			qr.update(sql, id);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -102,10 +102,10 @@ public class QuestionDao {
 		return list;
 	}
 	
-	public void updateFlag(int userId, Date sendTime, boolean flag) {
-		String sql = "update question set flag = ? where userId = ? and sendTime = ?";
+	public void updateFlag(int id, boolean flag) {
+		String sql = "update question set flag = ? where id = ?";
 		try{
-			qr.update(sql, flag, userId, sendTime);
+			qr.update(sql, flag, id);
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

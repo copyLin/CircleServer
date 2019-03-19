@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class MyDeliveryServlet extends HttpServlet {
 		
 		DeliveryDao deliveryDao = new DeliveryDao();
 		UserDao userDao = new UserDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		List<DeliveryItem> items = new ArrayList<>();
 		List<Delivery> list = new ArrayList<>();
@@ -60,7 +62,7 @@ public class MyDeliveryServlet extends HttpServlet {
 				String deliveryId = String.valueOf(delivery.getId());
 			    String userImg = userDao.getUserImg(delivery.getUserId());
 			    String userName = userDao.getUserName(delivery.getUserId());
-			    String sendTime = String.valueOf(delivery.getSendTime());
+			    String sendTime = formatter.format(delivery.getSendTime());
 			    String content = delivery.getContent();
 			    String price = String.valueOf(delivery.getPrice());
 			    boolean flag = delivery.isFlag();

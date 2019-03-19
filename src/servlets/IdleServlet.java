@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class IdleServlet extends HttpServlet {
 		IdleDao idleDao = new IdleDao();
 		UserDao userDao = new UserDao();
 		ImageDao imageDao = new ImageDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		List<IdleItem> items = new ArrayList<>();
 		List<Idle> list = new ArrayList<>();
@@ -64,7 +66,7 @@ public class IdleServlet extends HttpServlet {
 			    String userImg = userDao.getUserImg(idle.getUserId());
 			    String userName = userDao.getUserName(idle.getUserId());
 			    String userId = String.valueOf(idle.getUserId());
-			    String sendTime = String.valueOf(idle.getSendTime());
+			    String sendTime = formatter.format(idle.getSendTime());
 			    String content = idle.getContent();
 			    String idleName = idle.getName();
 			    String price = String.valueOf(idle.getPrice());

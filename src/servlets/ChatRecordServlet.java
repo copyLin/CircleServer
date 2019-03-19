@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class ChatRecordServlet extends HttpServlet {
 		String currentId = request.getParameter("currentId");
 		
 		ChatRecordDao chatRecordDao = new ChatRecordDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		List<ChatItem> items = new ArrayList<>();
 		List<ChatRecord> list = new ArrayList<>();
@@ -58,7 +60,7 @@ public class ChatRecordServlet extends HttpServlet {
 			    String content = chatRecord.getContent();
 			    String fromId = String.valueOf(chatRecord.getFromId());
 			    String toId = String.valueOf(chatRecord.getToId());
-			    String sendTime = String.valueOf(chatRecord.getSendTime());
+			    String sendTime = formatter.format(chatRecord.getSendTime());
 			    boolean flag = chatRecord.isFlag();
 			    
 			    ChatItem item = new ChatItem(id, content, fromId, toId, sendTime, flag);

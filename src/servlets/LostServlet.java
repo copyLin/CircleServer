@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class LostServlet extends HttpServlet {
 		LostDao lostDao = new LostDao();
 		UserDao userDao = new UserDao();
 		ImageDao imageDao = new ImageDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		List<LostItem> items = new ArrayList<>();
 		List<Lost> list = new ArrayList<>();
@@ -64,9 +66,9 @@ public class LostServlet extends HttpServlet {
 			    String userImg = userDao.getUserImg(lost.getUserId());
 			    String userName = userDao.getUserName(lost.getUserId());
 			    String userId = String.valueOf(lost.getUserId());
-			    String sendTime = String.valueOf(lost.getSendTime());
+			    String sendTime = formatter.format(lost.getSendTime());
 			    String content = lost.getContent();
-			    String eventTime = String.valueOf(lost.getEventTime());
+			    String eventTime = formatter.format(lost.getEventTime());
 			    String location = lost.getLocation();
 			    String contact = lost.getContact();
 			    boolean flag = lost.isFlag();

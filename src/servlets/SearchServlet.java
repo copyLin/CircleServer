@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,10 +54,11 @@ public class SearchServlet extends HttpServlet {
 		String label = request.getParameter("label");
 		String text = request.getParameter("text");
 		
-		System.out.println("SearchServlet:" + label + text);
+		//System.out.println("SearchServlet:" + label + text);
 		
 		UserDao userDao = new UserDao();
 		ImageDao imageDao = new ImageDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		switch (label){
 		case "–£‘∞ª∞Ã‚":
@@ -73,7 +75,7 @@ public class SearchServlet extends HttpServlet {
 					String qUserImg = userDao.getUserImg(question.getUserId());
 					String qUserName = userDao.getUserName(question.getUserId());
 					String qUserId = String.valueOf(question.getUserId());
-					String qSendTime = String.valueOf(question.getSendTime());
+					String qSendTime = formatter.format(question.getSendTime());
 					String qContent = question.getContent();
 					boolean qFlag = question.isFlag();
 					int qReportNum = question.getReportNum();
@@ -103,7 +105,7 @@ public class SearchServlet extends HttpServlet {
 					String lUserImg = userDao.getUserImg(lost.getUserId());
 					String lUserName = userDao.getUserName(lost.getUserId());
 					String lUserId = String.valueOf(lost.getUserId());
-					String lSendTime = String.valueOf(lost.getSendTime());
+					String lSendTime = formatter.format(lost.getSendTime());
 					String lContent = lost.getContent();
 					String eventTime = String.valueOf(lost.getEventTime());
 					String location = lost.getLocation();
@@ -136,7 +138,7 @@ public class SearchServlet extends HttpServlet {
 				    String iUserImg = userDao.getUserImg(idle.getUserId());
 				    String iUserName = userDao.getUserName(idle.getUserId());
 				    String iUserId = String.valueOf(idle.getUserId());
-				    String iSendTime = String.valueOf(idle.getSendTime());
+				    String iSendTime = formatter.format(idle.getSendTime());
 				    String iContent = idle.getContent();
 				    String idleName = idle.getName();
 				    String iPrice = String.valueOf(idle.getPrice());
@@ -168,7 +170,7 @@ public class SearchServlet extends HttpServlet {
 				    String dUserImg = userDao.getUserImg(delivery.getUserId());
 				    String dUserName = userDao.getUserName(delivery.getUserId());
 				    String dUserId = String.valueOf(delivery.getUserId());
-				    String dSendTime = String.valueOf(delivery.getSendTime());
+				    String dSendTime = formatter.format(delivery.getSendTime());
 				    String dContent = delivery.getContent();
 				    String dPrice = String.valueOf(delivery.getPrice());
 				    boolean dFlag = delivery.isFlag();

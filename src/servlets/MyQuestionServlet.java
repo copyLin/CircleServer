@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class MyQuestionServlet extends HttpServlet {
 		QuestionDao questionDao = new QuestionDao();
 		UserDao userDao = new UserDao();
 		ImageDao imageDao = new ImageDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		List<QuestionItem> items = new ArrayList<>();
 		List<Question> list = new ArrayList<>();
@@ -62,7 +64,7 @@ public class MyQuestionServlet extends HttpServlet {
 				String questionId = String.valueOf(question.getId());
 				String userImg = userDao.getUserImg(question.getUserId());
 				String userName = userDao.getUserName(question.getUserId());
-				String sendTime = String.valueOf(question.getSendTime());
+				String sendTime = formatter.format(question.getSendTime());
 				String content = question.getContent();
 				boolean flag = question.isFlag();
 				int reportNum = question.getReportNum();

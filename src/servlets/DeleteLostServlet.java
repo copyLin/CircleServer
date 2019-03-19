@@ -33,16 +33,14 @@ public class DeleteLostServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
-		String sendTime = request.getParameter("sendTime");
+		String id = request.getParameter("id");
 		
 		LostDao lostDao = new LostDao();
 		ImageDao imageDao = new ImageDao();
 		
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			lostDao.deleteLost(Integer.valueOf(userId), formatter.parse(sendTime));
-			imageDao.deleteImage(Integer.valueOf(userId), formatter.parse(sendTime));
+			lostDao.deleteLost(Integer.valueOf(id));
 		} catch (Exception e){
 			e.printStackTrace();
 		}

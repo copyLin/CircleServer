@@ -40,12 +40,13 @@ public class UpdatePassword extends HttpServlet {
 		
 		UserDao userDao = new UserDao();
 		User user = userDao.getUser(Integer.valueOf(userId));
+		response.setContentType("text/html;charset=utf-8");
 		if(oldPassword.equals(user.getPassword())){
 			if(firstInput.equals(secondInput)){
 				userDao.updatePassword(firstInput, Integer.valueOf(userId));
 				response.getWriter().append("修改成功");
 			}else{
-				response.getWriter().append("新密码不一致");
+				response.getWriter().append("密码不一致");
 			}
 		}else{
 			response.getWriter().append("密码错误");

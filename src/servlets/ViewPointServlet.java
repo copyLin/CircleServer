@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class ViewPointServlet extends HttpServlet {
 		
 		ViewPointDao viewPointDao = new ViewPointDao();
 		UserDao userDao = new UserDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		List<ViewPoint> list = viewPointDao.getViewPoint(Integer.valueOf(kId), lab);
 		List<ViewPointItem> items = new ArrayList<>();
@@ -57,7 +59,7 @@ public class ViewPointServlet extends HttpServlet {
 				String userImg = userDao.getUserImg(viewPoint.getUserId());
 				String userName = userDao.getUserName(viewPoint.getUserId());
 				String content = viewPoint.getContent();
-				String sendTime = String.valueOf(viewPoint.getSendTime());
+				String sendTime = formatter.format(viewPoint.getSendTime());
 				String tip = null;
 				String keyId = String.valueOf(viewPoint.getKeyId());
 				String label = viewPoint.getLabel();

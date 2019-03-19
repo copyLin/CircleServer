@@ -32,14 +32,13 @@ public class DeleteDeliveryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
-		String sendTime = request.getParameter("sendTime");
+		String id = request.getParameter("id");
 		
 		DeliveryDao deliveryDao = new DeliveryDao();
 		
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			deliveryDao.deleteDelivery(Integer.valueOf(userId), formatter.parse(sendTime));
+			deliveryDao.deleteDelivery(Integer.valueOf(id));
 		} catch (Exception e){
 			e.printStackTrace();
 		}

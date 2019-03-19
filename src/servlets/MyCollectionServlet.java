@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +41,10 @@ public class MyCollectionServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String currentId = request.getParameter("currentId");
 		
-		System.out.println("MyCollection:" + userId + ", " + currentId);
+		//System.out.println("MyCollection:" + userId + ", " + currentId);
 		
 		CollectionDao collectionDao = new CollectionDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		List<Collection> list = new ArrayList<>();;
 		if(currentId.equals("0")){
@@ -57,7 +59,7 @@ public class MyCollectionServlet extends HttpServlet {
 				String keyId = String.valueOf(collection.getKeyId());
 				String label = collection.getLabel();
 				String name = collection.getName();
-				String time = String.valueOf(collection.getCollectionTime());
+				String time = formatter.format(collection.getCollectionTime());
 				
 				CollectionItem item = new CollectionItem(id, keyId, label, name, time);
 				items.add(item);

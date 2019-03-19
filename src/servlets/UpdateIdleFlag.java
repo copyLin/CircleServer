@@ -32,14 +32,13 @@ public class UpdateIdleFlag extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("userId");
-		String sendTime = request.getParameter("sendTime");
+		String id = request.getParameter("id");
 		String flag = request.getParameter("flag");
 		
 		IdleDao idleDao = new IdleDao();
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			idleDao.updateFlag(Integer.valueOf(userId), formatter.parse(sendTime), Boolean.valueOf(flag));
+			idleDao.updateFlag(Integer.valueOf(id), Boolean.valueOf(flag));
 		} catch (Exception e){
 			e.printStackTrace();
 		}

@@ -70,10 +70,10 @@ public class IdleDao {
 		return idle;
 	}
 
-	public void deleteIdle(int userId, Date sendTime) {
-		String sql = "delete from idle where userId = ? and sendTime = ?";
+	public void deleteIdle(int id) {
+		String sql = "delete from idle where id = ?";
 		try{
-			qr.update(sql, userId, sendTime);
+			qr.update(sql, id);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -102,10 +102,10 @@ public class IdleDao {
 		return list;
 	}
 
-	public void updateFlag(int userId, Date sendTime, boolean flag) {
-		String sql = "update idle set flag = ? where userId = ? and sendTime = ?";
+	public void updateFlag(int id, boolean flag) {
+		String sql = "update idle set flag = ? where id = ?";
 		try{
-			qr.update(sql, flag, userId, sendTime);
+			qr.update(sql, flag, id);
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

@@ -57,7 +57,7 @@ public class ChatRecordDao {
 
 	public List<ChatRecord> getRecentChat(int userId) {
 		List<ChatRecord> list = new ArrayList<>();
-		String sql = "select * from chatRecord where id in(select max(id) from chatRecord where toId = ? and state = true group by fromId)";
+		String sql = "select * from chatRecord where id in(select max(id) from chatRecord where toId = ? and state = true group by fromId)  order by id desc";
 		try{
 			list = (List<ChatRecord>) qr.query(sql, new BeanListHandler(ChatRecord.class), userId);
 		}catch(SQLException e){

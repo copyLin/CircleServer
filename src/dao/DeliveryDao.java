@@ -58,10 +58,10 @@ public class DeliveryDao {
 		return content;
 	}
 
-	public void deleteDelivery(int userId, Date sendTime) {
-		String sql = "delete from delivery where userId = ? and sendTime = ?";
+	public void deleteDelivery(int id) {
+		String sql = "delete from delivery where id = ?";
 		try{
-			qr.update(sql, userId, sendTime);
+			qr.update(sql, id);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -90,10 +90,10 @@ public class DeliveryDao {
 		return list;
 	}
 	
-	public void updateFlag(int userId, Date sendTime, boolean flag) {
-		String sql = "update delivery set flag = ? where userId = ? and sendTime = ?";
+	public void updateFlag(int id, boolean flag) {
+		String sql = "update delivery set flag = ? where id = ?";
 		try{
-			qr.update(sql, flag, userId, sendTime);
+			qr.update(sql, flag, id);
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

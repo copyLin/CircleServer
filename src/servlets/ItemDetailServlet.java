@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -51,6 +52,7 @@ public class ItemDetailServlet extends HttpServlet {
 		
 		UserDao userDao = new UserDao();
 		ImageDao imageDao = new ImageDao();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		switch (label){
 			case "Question":
@@ -62,7 +64,7 @@ public class ItemDetailServlet extends HttpServlet {
 					String qUserImg = userDao.getUserImg(question.getUserId());
 					String qUserName = userDao.getUserName(question.getUserId());
 					String qUserId = String.valueOf(question.getUserId());
-					String qSendTime = String.valueOf(question.getSendTime());
+					String qSendTime = formatter.format(question.getSendTime());
 					String qContent = question.getContent();
 					boolean qFlag = question.isFlag();
 					int qReportNum = question.getReportNum();
@@ -86,9 +88,9 @@ public class ItemDetailServlet extends HttpServlet {
 				    String lUserImg = userDao.getUserImg(lost.getUserId());
 				    String lUserName = userDao.getUserName(lost.getUserId());
 				    String lUserId = String.valueOf(lost.getUserId());
-				    String lSendTime = String.valueOf(lost.getSendTime());
+				    String lSendTime = formatter.format(lost.getSendTime());
 				    String lContent = lost.getContent();
-				    String eventTime = String.valueOf(lost.getEventTime());
+				    String eventTime = formatter.format(lost.getEventTime());
 				    String location = lost.getLocation();
 				    String contact = lost.getContact();
 				    boolean lFlag = lost.isFlag();
@@ -113,7 +115,7 @@ public class ItemDetailServlet extends HttpServlet {
 				    String iUserImg = userDao.getUserImg(idle.getUserId());
 				    String iUserName = userDao.getUserName(idle.getUserId());
 				    String iUserId = String.valueOf(idle.getUserId());
-				    String iSendTime = String.valueOf(idle.getSendTime());
+				    String iSendTime = formatter.format(idle.getSendTime());
 				    String iContent = idle.getContent();
 				    String idleName = idle.getName();
 				    String price = String.valueOf(idle.getPrice());

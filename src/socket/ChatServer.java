@@ -174,6 +174,7 @@ public class ChatServer {
                         System.out.println("目标用户在线 >>" + item);
 					}else {
 						mClientList.remove(toId);
+						client.close();
 						chatRecordDao.addChatRecord(chatRecord);
 						System.out.println("目标用户不在线 >>" + item);
 					}
@@ -188,15 +189,17 @@ public class ChatServer {
 			
 		}
 		
-		private Boolean isConnected(Socket socket){
+		private boolean isConnected(Socket socket){
+			boolean state = false;
 	        try{
 	            socket.sendUrgentData(0xFF);
-	            return true;
+	            state = true;
 	        }catch(Exception e){
 	        	System.out.println("catch exception");
 	        	e.printStackTrace();
-	            return false;
+	            state = false;
 	        }
+	        return state;
 	    }
 	}
 }

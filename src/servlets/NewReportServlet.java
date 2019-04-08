@@ -71,7 +71,7 @@ public class NewReportServlet extends HttpServlet {
 			response.getWriter().append("后台已收到您的举报信息");
 		}else {
 			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().append("后台已收到您的举报信息，请勿重复操作");
+			response.getWriter().append("您已举报过该内容，请勿多次操作");
 		}
 		
 		//System.out.println(reportRecord);
